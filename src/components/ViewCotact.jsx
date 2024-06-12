@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const ViewCotact = () => {
 
 const [data,changedata]=useState(
     [
 
-        {
-"firstname":"nithya",
-        "lastname":"k",
-        "email":"ni@gmail.com",
-        "mobile":"9876543456"
-            
-        }
+        
     ]
 )
+
+const fetchdata=()=>{
+    axios.get("http://localhost:8080/view").then(
+        (respose)=>{
+changedata(respose.data)
+        }
+    )
+}
+useEffect(()=>{fetchdata()},[])
 
   return (
     <div>

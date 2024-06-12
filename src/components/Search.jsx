@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const Search = () => {
 
@@ -8,13 +9,35 @@ const Search = () => {
             "firstname":""
         }
     )
-
+const [result,setresult]=useState(
+    []
+)
 const inputHandler=(event)=>{
     changedata({...data,[event.target.name]:event.target.value})
 }
 
 const readValue=()=>{
     console.log(data)
+    axios.post("http://localhost:8080/search",data).then(
+        (response)=>{
+            console.log(response.data)
+            setresult(response.data)
+        }
+    )
+}
+
+const deletecontact=(id)=>{
+    let input={"_id":id}
+    axios.post("http://localhost:8080/delete",input).then(
+        (response)=>{
+            console.log(response.data)
+            if (response.data.status=="Success") {
+                alert("deleted successfully")
+            } else {
+                alert("error")
+            }
+        }
+    )
 }
 
   return (
@@ -36,6 +59,36 @@ const readValue=()=>{
 
         </div>
     </div>
+
+    <table class="table">
+  <thead>
+  <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {result.map((value,index)=>{
+      return  <tr>
+        <th scope="row">{value.firstname}</th>
+        <td>{value.lastname}</td>
+        <td>{value.email}</td>
+        <td>{value.mobile}</td>
+        
+        <td>
+            <button className="btn btn-danger" onClick={()=>{deletecontact(value._id)}}>Delete</button>
+        </td>
+
+      </tr>
+    })}
+  
+  </tbody>
+</table>
+
+
 </div>
 
 

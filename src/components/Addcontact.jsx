@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const Addcontact = () => {
 
@@ -18,7 +19,19 @@ const inputHandler=(event)=>{
 }
 
 const readValue=()=>{
+    axios.post("http://localhost:8080/add",data).then(
+        (response)=>{
+            console.log(response.data)
+            if (response.data.status=="Success") {
+                alert("add successfully")
+                
+            } else {
+                alert("error")
+            }
+        }
+    )
     console.log(data)
+
 }
 
   return (
