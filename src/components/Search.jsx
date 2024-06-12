@@ -9,6 +9,11 @@ const Search = () => {
         }
     )
 
+const [result,setresult]=useState(
+    []
+)
+
+
 const inputHandler=(event)=>{
     changedata({...data,[event.target.name]:event.target.value})
 }
@@ -36,6 +41,41 @@ const readValue=()=>{
 
         </div>
     </div>
+
+<div className="row">
+    <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile</th>
+    </tr>
+  </thead>
+  <tbody>
+   {result.map((value,index)=>{
+    return  <tr>
+    <th scope="row">1</th>
+    <td>Mark</td>
+    <td>Otto</td>
+    <td>@mdo</td>
+    <td>
+
+<botton className="btn btn-danger">Delete</botton>
+
+    </td>
+  </tr>
+   })}
+    
+  </tbody>
+</table>
+
+    </div>
+</div>
+
 </div>
 
 
