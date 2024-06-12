@@ -9,9 +9,7 @@ const Search = () => {
             "firstname":""
         }
     )
-const [result,setresult]=useState(
-    []
-)
+
 const inputHandler=(event)=>{
     changedata({...data,[event.target.name]:event.target.value})
 }
@@ -60,34 +58,7 @@ const deletecontact=(id)=>{
         </div>
     </div>
 
-    <table class="table">
-  <thead>
-  <tr>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Mobile</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    {result.map((value,index)=>{
-      return  <tr>
-        <th scope="row">{value.firstname}</th>
-        <td>{value.lastname}</td>
-        <td>{value.email}</td>
-        <td>{value.mobile}</td>
-        
-        <td>
-            <button className="btn btn-danger" onClick={()=>{deletecontact(value._id)}}>Delete</button>
-        </td>
-
-      </tr>
-    })}
-  
-  </tbody>
-</table>
-
+   
 
 </div>
 
